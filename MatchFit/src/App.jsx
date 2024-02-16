@@ -2,8 +2,9 @@ import './App.css'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import { Home } from './pages/Home/Home';
 import { Navbar } from './components/Navbar';
-import {EmployerLoginSignup} from './pages/EmployerLoginSignup/login';
-import { JobseekerLogin } from './pages/JobSeekerLoginSignup/login';
+import {EmployerLoginSignup} from './pages/EmployerLoginSignup/Employerlogin'
+import { JobseekerLogin } from './pages/JobSeekerLoginSignup/JobSeekerlogin';
+import { Employerlanding } from './pages/employer/employerlanding';
 
 function App() {
 
@@ -12,8 +13,9 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path="/" element={<Home/>} />
-        <Route path="/EmployerLoginSignup" element={<EmployerLoginSignup/>}/>
+        <Route path="/EmployerLoginSignup" element={<EmployerLoginSignup />}/>
         <Route path="/JobseekerLogin" element={<JobseekerLogin/>}/>
+        <Route path="/EmployerLanding" element={<Employerlanding/>}/>
           {/* <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/services" element={<Services />} />
