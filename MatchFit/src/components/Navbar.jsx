@@ -1,19 +1,23 @@
 import './Navbar.css'
 import logo from '../assets/matchfit-transparent-logo.png'
+import {Link} from 'react-router-dom'
+/* import LoginSignup from '../pages/LoginSignup/login.jsx' */
 
 export const Navbar = () => {
   return (
     <header>
         <div className="logo left">
-            <img src={logo} alt="logo" width={140}/>
+            <a href=""></a>
+            <Link to='/'><img src={logo} alt="logo" width={140}/></Link>
+            {/* <img src={logo} alt="logo" width={140}/> */}
         </div>
         <div className="left">
-            <li><a href="#">Suggested Jobs</a></li>
-            <li><a href="#">Post a Job</a></li>
+            <li><Link to='/JobseekerLogin'>Suggested Jobs</Link></li>
+            <li><Link to='/EmployerLoginSignup'>Post a Job</Link></li>
         </div>
         <div className="center">
-            <li><a href="#"><i className='bx bxs-user'/> Job Seekers</a></li>
-            <li><a href="#"><i className='bx bx-buildings'/> Employers</a></li>
+            <li><Link to='/JobseekerLogin'><i className='bx bxs-user'/> Job Seekers</Link></li>
+            <li><Link to='/EmployerLoginSignup'><i className='bx bx-buildings'/> Employers</Link></li>
         </div>
         <i className='bx bx-menu right'/>
     </header>
