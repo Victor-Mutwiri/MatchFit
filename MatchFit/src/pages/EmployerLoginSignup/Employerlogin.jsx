@@ -12,8 +12,8 @@ export const EmployerLoginSignup = ()=>{
         const password = formData.get('password');
     
         try {
-          const response = await fetch('http://localhost:1337/auth/local', {
-            method: 'POST',
+          const response = await fetch("http://localhost:1337/api/auth/local", {
+            method: "POST",
             headers: {
               'Content-Type': 'application/json',
             },
@@ -23,6 +23,10 @@ export const EmployerLoginSignup = ()=>{
             }),
           });
     
+
+          console.log('Response status:', response.status);
+
+
           if (response.ok) {
             // Handle successful login
             const data = await response.json();
