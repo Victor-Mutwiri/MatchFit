@@ -1,14 +1,28 @@
-import {useNavigate} from 'react-router-dom'
+
 import { useState } from 'react';
 import './login.css'
 import logo from '../../assets/matchfit-transparent-logo.png'
+import axios from 'axios'
 
 const initialUser = {password: '', identifier: ''}
 export const EmployerLogin = ()=>{
     const [user, setUser] = useState(initialUser)
 
-    const handleChange = ()=>{}
-    const handleLogin = ()=>{}
+    
+    const handleChange = ({target})=>{
+      const {name,value} = target
+      setUser((currentUser)=>({...currentUser,
+        [name]: value}))
+    }
+    const handleLogin = async ()=>{
+      const url = `http://localhost:1337/api/auth/local`
+      try {
+        if(user.identifier && user.password){
+          const res = await axios.post(url, user)
+          console.log(res)
+        }
+      } catch (error) {}
+    }
     return (
         <div className="jobseeker">
         <img src={logo} alt="JobseekerLogin" width={100}/>

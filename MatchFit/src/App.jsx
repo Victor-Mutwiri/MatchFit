@@ -5,6 +5,7 @@ import { Navbar } from './components/Navbar';
 import {EmployerLogin} from './pages/EmployerAuth/Employerlogin'
 import { UserLogin } from './pages/UserAuth/Userlogin';
 import { Employerlanding } from './pages/employer/employerlanding';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<Navigate to="/404" />} /> */}
       </Routes>
+      <ToastContainer/>
     </BrowserRouter>
   )
 }
