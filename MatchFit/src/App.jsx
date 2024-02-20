@@ -3,6 +3,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import { Home } from './pages/Home/Home';
 import { Navbar } from './components/Navbar';
 import {EmployerLogin} from './pages/EmployerAuth/Employerlogin'
+import { EmployerRegistration } from './pages/EmployerAuth/EmployerRegistration'
 import { UserLogin } from './pages/UserAuth/Userlogin';
 import { Employerlanding } from './pages/employer/employerlanding';
 import { ToastContainer } from 'react-toastify';
@@ -14,9 +15,10 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path="/" element={<Home/>} />
-        <Route path="/EmployerLoginSignup" element={<EmployerLogin />}/>
+        <Route path="/EmployerLogin" element={<EmployerLogin />}/>
         <Route path="/JobseekerLogin" element={<UserLogin/>}/>
         <Route path="/EmployerLanding" element={<Employerlanding/>}/>
+        <Route path="/EmployerRegistration" element={<EmployerRegistration/>}/>
           {/* <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/services" element={<Services />} />

@@ -13,11 +13,11 @@ export const Navbar = () => {
         </div>
         <div className="left">
             <li><Link to='/JobseekerLogin'>Suggested Jobs</Link></li>
-            <li><Link to='/EmployerLoginSignup'>Post a Job</Link></li>
+            <li><Link to='/EmployerLogin'>Post a Job</Link></li>
         </div>
         <div className="center">
             <li><Link to='/JobseekerLogin'><i className='bx bxs-user'/> Job Seekers</Link></li>
-            <li><Link to='/EmployerLoginSignup'><i className='bx bx-buildings'/> Employers</Link></li>
+            <li><Link to='/EmployerLogin'><i className='bx bx-buildings'/> Employers</Link></li>
         </div>
         <i className='bx bx-menu right'/>
     </header>
