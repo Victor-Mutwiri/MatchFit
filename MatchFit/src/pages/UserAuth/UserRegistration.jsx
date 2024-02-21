@@ -4,10 +4,12 @@ import logo from '../../assets/matchfit-black-transparent.png'
 import axios from 'axios'
 import { toast } from 'react-toastify';
 
-const initialUser = {username: "", email: "", password: ""}
 
-export const EmployerRegistration = () => {
-  const [user, setUser] = useState(initialUser)
+
+const initialUser = {username: "", email: "", password: ""}
+export const UserRegistration = () => {
+
+    const [user, setUser] = useState(initialUser)
   const navigate = useNavigate()
 
   const signup = async(event)=>{
@@ -21,7 +23,7 @@ export const EmployerRegistration = () => {
             hideProgressBar: true,
           })
           setUser(initialUser)
-          navigate('/EmployerLogin')
+          navigate('/UserLogin')
         }
     } else {
       toast.error("Please fill in all fields", {hideProgressBar: true})
@@ -34,6 +36,8 @@ export const EmployerRegistration = () => {
     const {name, value} = target;
     setUser((currentUser)=>({...currentUser, [name]: value}))
   }
+
+
   return (
     <div className="jobseeker">
           <img src={logo} alt="JobseekerLogin" width={100}/>
@@ -44,7 +48,7 @@ export const EmployerRegistration = () => {
                   <input type="email" name="email" value={user.email} placeholder="Enter Email..." onChange={handleUserChange}/>
                   <input type="password" name="password" value={user.password} placeholder="Enter Password..." onChange={handleUserChange}/>
                   <button  type="submit" /* onClick={signup} */>Sign Up</button>
-                  <h4>Click <Link to='/EmployerLogin'>here</Link> to login</h4>
+                  <h4>Click <Link to='/UserLogin'>here</Link> to login</h4>
               </form>
           </section>
     </div>
