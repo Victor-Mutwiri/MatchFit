@@ -1,4 +1,6 @@
-import { userData } from "../../helpers";
+/* import { userData } from "../../helpers"; */
+import { userData } from "../../authUtils";
+
 
 export const Employerlanding = () => {
   const {userName} = userData()

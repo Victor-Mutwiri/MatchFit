@@ -4,11 +4,13 @@ import './login.css'
 import logo from '../../assets/matchfit-transparent-logo.png'
 import axios from 'axios'
 import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { storeUser } from "../../helpers";
 
 const initialUser = { password: '', identifier: ''}
 export const EmployerLogin = ()=>{
     const [user, setUser] = useState(initialUser)
+    const navigate = useNavigate();
 
     
     const handleChange = ({target})=>{
@@ -19,9 +21,16 @@ export const EmployerLogin = ()=>{
     const handleLogin = async ()=>{
       const url = `http://localhost:1337/api/auth/local`
       try {
-        if(user.identifier && user.password){
-          const res = await axios.post(url, user)
-          console.log(res)
+        if (user.identifier && user.password) {
+          const { data } = await axios.post(url, user);
+          if (data.jwt) {
+            storeUser(data);
+            toast.success("Logged in successfully!", {
+              hideProgressBar: true,
+            });
+            setUser(initialUser);
+            navigate("/EmployerLanding");
+          }
         }
       } catch (error) {
         toast.error(error.message,
