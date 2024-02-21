@@ -42,10 +42,10 @@ export const EmployerLogin = ()=>{
           <img src={logo} alt="JobseekerLogin" width={100}/>
           <section className="logincontainer">
               <h3>Login:</h3>
-              <form>
+              <form onSubmit={handleLogin}>
                   <input type="email" name="identifier" value={user.identifier} placeholder="Enter Email..." onChange={handleChange}/>
                   <input type="password" name="password" value={user.password} placeholder="Enter Password..." onChange={handleChange}/>
-                  <button onClick={handleLogin}>Login</button>
+                  <button type="submit" /* onClick={handleLogin} */>Login</button>
                   <h4>Click <Link to='/EmployerRegistration'>here</Link> to Sign up</h4>
               </form>
           </section>

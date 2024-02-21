@@ -7,6 +7,7 @@ import { EmployerRegistration } from './pages/EmployerAuth/EmployerRegistration'
 import { UserLogin } from './pages/UserAuth/Userlogin';
 import { Employerlanding } from './pages/employer/employerlanding';
 import { ToastContainer } from 'react-toastify';
+import { Protector } from "./helpers";
 
 function App() {
 
@@ -17,7 +18,8 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/EmployerLogin" element={<EmployerLogin />}/>
         <Route path="/JobseekerLogin" element={<UserLogin/>}/>
-        <Route path="/EmployerLanding" element={<Employerlanding/>}/>
+        {/* <Route path="/EmployerLanding" element={<Employerlanding/>}/> */}
+        <Route path="/EmployerLanding" element={<Protector Component={Employerlanding} />}/>
         <Route path="/EmployerRegistration" element={<EmployerRegistration/>}/>
           {/* <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
