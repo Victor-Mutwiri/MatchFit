@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "jobs",
+  "info": {
+    "singularName": "job",
+    "pluralName": "jobs",
+    "displayName": "Job"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Position": {
+      "type": "string"
+    },
+    "Experience": {
+      "type": "integer"
+    },
+    "Company": {
+      "type": "string"
+    },
+    "About": {
+      "type": "string"
+    },
+    "Overview": {
+      "type": "text"
+    },
+    "Responsibilities": {
+      "type": "text"
+    },
+    "Qualifications": {
+      "type": "text"
+    },
+    "ApplicationMethod": {
+      "type": "json"
+    },
+    "jobtype": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::jobtype.jobtype",
+      "inversedBy": "jobs"
+    }
+  }
+}

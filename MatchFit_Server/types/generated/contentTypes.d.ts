@@ -362,31 +362,68 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiJobseekerJobseeker extends Schema.CollectionType {
-  collectionName: 'jobseekers';
+export interface ApiJobJob extends Schema.CollectionType {
+  collectionName: 'jobs';
   info: {
-    singularName: 'jobseeker';
-    pluralName: 'jobseekers';
-    displayName: 'jobseeker';
+    singularName: 'job';
+    pluralName: 'jobs';
+    displayName: 'Job';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Email: Attribute.Email;
-    Password: Attribute.Password;
-    Username: Attribute.String;
+    Position: Attribute.String;
+    Experience: Attribute.Integer;
+    Company: Attribute.String;
+    About: Attribute.String;
+    Overview: Attribute.Text;
+    Responsibilities: Attribute.Text;
+    Qualifications: Attribute.Text;
+    ApplicationMethod: Attribute.JSON;
+    jobtype: Attribute.Relation<
+      'api::job.job',
+      'manyToOne',
+      'api::jobtype.jobtype'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::job.job', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::job.job', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiJobtypeJobtype extends Schema.CollectionType {
+  collectionName: 'jobtypes';
+  info: {
+    singularName: 'jobtype';
+    pluralName: 'jobtypes';
+    displayName: 'Jobtype';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Type: Attribute.String;
+    jobs: Attribute.Relation<
+      'api::jobtype.jobtype',
+      'oneToMany',
+      'api::job.job'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::jobseeker.jobseeker',
+      'api::jobtype.jobtype',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::jobseeker.jobseeker',
+      'api::jobtype.jobtype',
       'oneToOne',
       'admin::user'
     > &
@@ -825,7 +862,8 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::jobseeker.jobseeker': ApiJobseekerJobseeker;
+      'api::job.job': ApiJobJob;
+      'api::jobtype.jobtype': ApiJobtypeJobtype;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;

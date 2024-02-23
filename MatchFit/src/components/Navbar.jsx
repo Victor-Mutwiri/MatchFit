@@ -23,3 +23,9 @@ export const Navbar = () => {
     </header>
   )
 }
+
+
+/* [
+  {"name": "Email"},
+  {"name": "Website"}
+] */

@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * jobseeker service
+ * jobtype service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::jobseeker.jobseeker');
+module.exports = createCoreService('api::jobtype.jobtype');
