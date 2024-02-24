@@ -368,6 +368,7 @@ export interface ApiJobJob extends Schema.CollectionType {
     singularName: 'job';
     pluralName: 'jobs';
     displayName: 'Job';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -402,12 +403,13 @@ export interface ApiJobtypeJobtype extends Schema.CollectionType {
     singularName: 'jobtype';
     pluralName: 'jobtypes';
     displayName: 'Jobtype';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Type: Attribute.String;
+    Type: Attribute.String & Attribute.Required;
     jobs: Attribute.Relation<
       'api::jobtype.jobtype',
       'oneToMany',

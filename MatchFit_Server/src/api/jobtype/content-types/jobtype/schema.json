@@ -4,7 +4,8 @@
   "info": {
     "singularName": "jobtype",
     "pluralName": "jobtypes",
-    "displayName": "Jobtype"
+    "displayName": "Jobtype",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,7 +13,8 @@
   "pluginOptions": {},
   "attributes": {
     "Type": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "jobs": {
       "type": "relation",

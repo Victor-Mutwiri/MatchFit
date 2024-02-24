@@ -17,7 +17,7 @@ export const useJobTypes = () => {
 
     const fetchJobs = async () => {
         try {
-            const {data:{data}} = await axios.get('http://localhost:1337/api/jobs')
+            const {data:{data}} = await axios.get('http://localhost:1337/api/jobs?populate=*')
             setJobs(data)
         } catch (error) {
             console.log(error)
