@@ -15,7 +15,7 @@ export const Employerlanding = () => {
 
       {/* {
         jobType.length && jobType.map(type=>{
-          const hasJobs = jobs.filter(job=>job.attributes === type.attributes)
+          const hasJobs = jobs.filter(job=>job.attributes.id === type.attributes.id)
           return hasJobs && hasJobs.length?(
             <>
               <h2>{type.attributes.name}</h2>

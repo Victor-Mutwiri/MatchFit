@@ -18,8 +18,10 @@ export const Userlanding = () => {
             <div key={type.id}>
               {hasJobs.map(job=>
                 <div key={job.id}>
-                  <h3>{job.attributes.title}</h3>
-                  <p>{job.attributes.description}</p>
+                  <h4>{job.attributes.Company}</h4>
+                  <h5>{job.attributes.Position}</h5>
+                  <span> <strong><i>{job.attributes.Experience} years</i></strong></span>
+                  <p>{job.attributes.Overview}</p>
                 </div>
               )}
               </div>
