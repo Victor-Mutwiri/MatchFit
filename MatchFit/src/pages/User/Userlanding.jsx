@@ -13,19 +13,19 @@ export const Userlanding = () => {
       {jobType.length && jobType.map(type=>{
         const hasJobs = jobs.filter(job=>job.attributes.jobtype.data.id === type.id)
         return hasJobs && hasJobs.length?(
-          <>
+          <div className="job-list">
             <h2>{type.attributes.Type}</h2>
-            <div key={type.id}>
+            <div className="list" key={type.id}>
               {hasJobs.map(job=>
-                <div key={job.id}>
+                <div className="job-info" key={job.id}>
                   <h4>{job.attributes.Company}</h4>
                   <h5>{job.attributes.Position}</h5>
                   <span> <strong><i>{job.attributes.Experience} years</i></strong></span>
                   <p>{job.attributes.Overview}</p>
                 </div>
               )}
-              </div>
-          </>
+            </div>
+          </div>
         ):null
         })
       }
