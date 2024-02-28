@@ -41,6 +41,12 @@
       "relation": "manyToOne",
       "target": "api::jobtype.jobtype",
       "inversedBy": "jobs"
+    },
+    "job_industry": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::job-industry.job-industry",
+      "inversedBy": "jobs"
     }
   }
 }

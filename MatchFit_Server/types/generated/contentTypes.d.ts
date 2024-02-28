@@ -362,77 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiJobJob extends Schema.CollectionType {
-  collectionName: 'jobs';
-  info: {
-    singularName: 'job';
-    pluralName: 'jobs';
-    displayName: 'Job';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Position: Attribute.String;
-    Experience: Attribute.Integer;
-    Company: Attribute.String;
-    About: Attribute.String;
-    Overview: Attribute.Text;
-    Responsibilities: Attribute.Text;
-    Qualifications: Attribute.Text;
-    ApplicationMethod: Attribute.JSON;
-    jobtype: Attribute.Relation<
-      'api::job.job',
-      'manyToOne',
-      'api::jobtype.jobtype'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::job.job', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::job.job', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
-export interface ApiJobtypeJobtype extends Schema.CollectionType {
-  collectionName: 'jobtypes';
-  info: {
-    singularName: 'jobtype';
-    pluralName: 'jobtypes';
-    displayName: 'Jobtype';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Type: Attribute.String & Attribute.Required;
-    jobs: Attribute.Relation<
-      'api::jobtype.jobtype',
-      'oneToMany',
-      'api::job.job'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::jobtype.jobtype',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::jobtype.jobtype',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -854,6 +783,153 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiJobJob extends Schema.CollectionType {
+  collectionName: 'jobs';
+  info: {
+    singularName: 'job';
+    pluralName: 'jobs';
+    displayName: 'Job';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Position: Attribute.String;
+    Experience: Attribute.Integer;
+    Company: Attribute.String;
+    About: Attribute.String;
+    Overview: Attribute.Text;
+    Responsibilities: Attribute.Text;
+    Qualifications: Attribute.Text;
+    ApplicationMethod: Attribute.JSON;
+    jobtype: Attribute.Relation<
+      'api::job.job',
+      'manyToOne',
+      'api::jobtype.jobtype'
+    >;
+    job_industry: Attribute.Relation<
+      'api::job.job',
+      'manyToOne',
+      'api::job-industry.job-industry'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::job.job', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::job.job', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiJobIndustryJobIndustry extends Schema.CollectionType {
+  collectionName: 'job_industries';
+  info: {
+    singularName: 'job-industry';
+    pluralName: 'job-industries';
+    displayName: 'JobIndustry';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Industry: Attribute.String;
+    jobs: Attribute.Relation<
+      'api::job-industry.job-industry',
+      'oneToMany',
+      'api::job.job'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::job-industry.job-industry',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::job-industry.job-industry',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiJobtypeJobtype extends Schema.CollectionType {
+  collectionName: 'jobtypes';
+  info: {
+    singularName: 'jobtype';
+    pluralName: 'jobtypes';
+    displayName: 'Jobtype';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Type: Attribute.String & Attribute.Required;
+    jobs: Attribute.Relation<
+      'api::jobtype.jobtype',
+      'oneToMany',
+      'api::job.job'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::jobtype.jobtype',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::jobtype.jobtype',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiUserProfileUserProfile extends Schema.CollectionType {
+  collectionName: 'user_profiles';
+  info: {
+    singularName: 'user-profile';
+    pluralName: 'user-profiles';
+    displayName: 'User Profile';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Photo: Attribute.Media;
+    Name: Attribute.String;
+    About: Attribute.Text;
+    Experience: Attribute.Integer;
+    Email: Attribute.Email;
+    Availability: Attribute.Boolean;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::user-profile.user-profile',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::user-profile.user-profile',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -864,8 +940,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::job.job': ApiJobJob;
-      'api::jobtype.jobtype': ApiJobtypeJobtype;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -874,6 +948,10 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::job.job': ApiJobJob;
+      'api::job-industry.job-industry': ApiJobIndustryJobIndustry;
+      'api::jobtype.jobtype': ApiJobtypeJobtype;
+      'api::user-profile.user-profile': ApiUserProfileUserProfile;
     }
   }
 }

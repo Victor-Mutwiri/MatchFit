@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "job_industries",
+  "info": {
+    "singularName": "job-industry",
+    "pluralName": "job-industries",
+    "displayName": "JobIndustry"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Industry": {
+      "type": "string"
+    },
+    "jobs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::job.job",
+      "mappedBy": "job_industry"
+    }
+  }
+}
