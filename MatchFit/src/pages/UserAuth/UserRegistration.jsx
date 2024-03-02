@@ -15,7 +15,9 @@ export const UserRegistration = () => {
   const signup = async(event)=>{
     event.preventDefault();
     try {
-      const url = `http://localhost:1337/api/auth/local/register`
+       const baseUrl = import.meta.env.DEV ? import.meta.env.VITE_DEV_API_BASE_URL : import.meta.env.VITE_PROD_API_BASE_URL;
+       const url = `${baseUrl}/auth/local/register`
+       /* const url = `http://localhost:1337/api/auth/local/register` */
       if (user.username && user.email && user.password) {
         const res = await axios.post(url, user)
         if(res.status === 200){

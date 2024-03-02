@@ -39,7 +39,11 @@ export const UserLogin = () => {
 
     const handleLogin = async (event)=>{
       event.preventDefault();
-      const url = `http://localhost:1337/api/auth/local`
+
+      const baseUrl = import.meta.env.DEV ? import.meta.env.VITE_DEV_API_BASE_URL : import.meta.env.VITE_PROD_API_BASE_URL;
+      const url = `${baseUrl}/auth/local`
+
+      /* const url = `http://localhost:1337/api/auth/local` */
       try {
         if (user.identifier && user.password) {
           const { data } = await axios.post(url, user);
