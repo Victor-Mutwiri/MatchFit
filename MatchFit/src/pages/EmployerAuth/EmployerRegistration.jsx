@@ -13,7 +13,9 @@ export const EmployerRegistration = () => {
   const signup = async(event)=>{
     event.preventDefault();
     try {
-      const url = `http://localhost:1337/api/auth/local/register`
+      const baseUrl = import.meta.env.DEV ? import.meta.env.VITE_DEV_API_BASE_URL : import.meta.env.VITE_PROD_API_BASE_URL;
+       const url = `${baseUrl}/auth/local/register`
+      /* const url = `http://localhost:1337/api/auth/local/register` */
       if (user.username && user.email && user.password) {
         const res = await axios.post(url, user)
         if(res.status === 200){
@@ -40,9 +42,9 @@ export const EmployerRegistration = () => {
           <section className="logincontainer">
               <h3>Sign Up:</h3>
               <form onSubmit={signup}>
-                  <input type="text" name="username" value={user.username} placeholder="Enter your full name..." onChange={handleUserChange}/>
-                  <input type="email" name="email" value={user.email} placeholder="Enter Email..." onChange={handleUserChange}/>
-                  <input type="password" name="password" value={user.password} placeholder="Enter Password..." onChange={handleUserChange}/>
+                  <input type="text" name="username" value={user.username} placeholder="Enter your full name..." onChange={handleUserChange} required/>
+                  <input type="email" name="email" value={user.email} placeholder="Enter Email..." onChange={handleUserChange} required/>
+                  <input type="password" name="password" value={user.password} placeholder="Enter Password..." onChange={handleUserChange} required/>
                   <button  type="submit" /* onClick={signup} */>Sign Up</button>
                   <h4>Click <Link to='/EmployerLogin'>here</Link> to login</h4>
               </form>

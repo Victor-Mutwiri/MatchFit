@@ -35,7 +35,11 @@ export const EmployerLogin = ()=>{
 
     const handleLogin = async (event)=>{
       event.preventDefault();
-      const url = `http://localhost:1337/api/auth/local`
+
+      const baseUrl = import.meta.env.DEV ? import.meta.env.VITE_DEV_API_BASE_URL : import.meta.env.VITE_PROD_API_BASE_URL;
+      const url = `${baseUrl}/auth/local`
+
+      /* const url = `http://localhost:1337/api/auth/local` */
       try {
         if (user.identifier && user.password) {
           const { data } = await axios.post(url, user);
@@ -59,9 +63,9 @@ export const EmployerLogin = ()=>{
           <section className="logincontainer">
               <h3>Login:</h3>
               <form onSubmit={handleLogin}>
-                  <input type="email" name="identifier" value={user.identifier} placeholder="Enter Email..." onChange={handleChange} autoComplete='off'/>
+                  <input type="email" name="identifier" value={user.identifier} placeholder="Enter Email..." onChange={handleChange} autoComplete='off' required/>
                   <div className="passwordInput">
-                    <input type={showPassword ? "text" : "password"} name="password" value={user.password} placeholder="Enter Password..." onChange={handleChange} autoComplete='off'/>
+                    <input type={showPassword ? "text" : "password"} name="password" value={user.password} placeholder="Enter Password..." onChange={handleChange} autoComplete='off' required/>
                     <i className='bx bxs-show' onClick={handleTogglePassword}/>
                   </div>
                   <button type="submit" /* onClick={handleLogin} */>Login</button>
