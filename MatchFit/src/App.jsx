@@ -13,7 +13,6 @@ import { Userlanding } from './pages/User/Userlanding';
 import { UserRegistration } from './pages/UserAuth/UserRegistration';
 import { UserProfile } from './pages/User/UserProfile';
 import ViewProfile from './pages/User/viewprofile';
-
 function App() {
   const [formData, setFormData] = useState({});
 
@@ -33,6 +32,7 @@ function App() {
         {/* <Route path='/UserProfile' element={<UserProfile/>}/> */}
         <Route path='/ViewProfile' element={<ViewProfile formData={formData} />}/>
         {/* <Route path='/ViewProfile' element={<ViewProfile/>}/> */}
+        <Route path='/UserProfile' element={<UserProfile/>}/>
           {/* <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/services" element={<Services />} />

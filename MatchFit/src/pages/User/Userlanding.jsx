@@ -1,5 +1,6 @@
 import { useJobTypes } from "./UseJobTypes";
 /* import { Link } from "react-router-dom"; */
+import { Link } from "react-router-dom";
 import './Userlanding.css'
 
 
@@ -12,7 +13,7 @@ export const Userlanding = () => {
     <div className="Userlanding">
       <h3>Check out our jobs</h3>
       {/* <button><Link to='/UserProfile'>My Profile</Link></button> */}
-      
+      <button><Link to='/UserProfile'>My Profile</Link></button>
       {jobType.length && jobType.map(type=>{
         const hasJobs = jobs.filter(job=>job.attributes.jobtype.data.id === type.id)
         return hasJobs && hasJobs.length?(
