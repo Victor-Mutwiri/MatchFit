@@ -34,8 +34,36 @@ div li a{
     align-items: center;
     gap: 20px;
 }
+.center-mobile{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
 .right{
     display: none;
     font-size: 30px;
     margin: 0 10px;
+}
+
+@media (max-width: 640px){
+    header{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    header .logo img{
+        width: 100px;
+    }
+    header .left{
+        gap: 10px;
+    } 
+    header .left-options{
+        display: none;
+    }
+    header .center{
+        display: none;
+    }
+
 }
