@@ -10,28 +10,16 @@ export const Navbar = () => {
             <Link to='/'><img src={logo} alt="logo" width={140}/></Link>
             {/* <img src={logo} alt="logo" width={140}/> */}
         </div>
-        <div className="left left-options">
-            {/* <li><Link to='/UserLogin'>Suggested Jobs</Link></li> */} {/* Feature paused for now */}
-            <li><Link to='/jobs'>Suggested Jobs</Link></li>
-            <li><Link to='/EmployerLogin'>Post a Job</Link></li>
-        </div>
-        <div className="center">
-            {/* <li><Link to='/UserLogin'><i className='bx bxs-user'/> Job Seekers</Link></li> */} {/* Feature paused for now */}
-            <li><Link to='/jobs'><i className='bx bxs-user'/> Job Seekers</Link></li>
-            <li><Link to='/EmployerLogin'><i className='bx bx-buildings'/> Employers</Link></li>
-        </div>
         <div className="center-mobile">
-            {/* <li><Link to='/UserLogin'><i className='bx bxs-user'/> Job Seekers</Link></li> */} {/* Feature paused for now */}
-            <li><Link to='/jobs'><i className='bx bxs-user'/> Jobs</Link></li>
-            <li><Link to='/EmployerLogin'><i className='bx bx-buildings'/> Employers</Link></li>
+            <li><Link to='/jobs'>Jobs</Link></li>
+        </div>
+        <div className="left left-options">
+            <li><Link to=''>Post a Job</Link></li>
+        </div>
+        <div className="left left-options">
+            <li><Link to=''>About</Link></li>
         </div>
         <i className='bx bx-menu right'/>
     </header>
   )
 }
-
-
-/* [
-  {"name": "Email"},
-  {"name": "Website"}
-] */

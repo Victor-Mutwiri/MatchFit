@@ -5,6 +5,11 @@ import data from '../../assets/Data.jpg'
 import sales from '../../assets/Sales.jpg'
 import marketing from '../../assets/Marketing.jpg'
 import customer from '../../assets/Customer.jpg'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faLaptop} from '@fortawesome/free-solid-svg-icons'
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { faMicrophone } from '@fortawesome/free-solid-svg-icons'
+import { faHeadset } from '@fortawesome/free-solid-svg-icons'
 
 export const Home = () => {
   return (
@@ -24,7 +29,7 @@ export const Home = () => {
             <div className='icons'>
                 <div>
                     <div className='borders'>
-                        <a href="#"><i className='bx bx-clipboard'/></a>
+                        <a href="/jobs"><i className='bx bx-clipboard'/></a>
                     </div>
                     <h4>Find and apply to jobs</h4>
                 </div>
@@ -32,7 +37,7 @@ export const Home = () => {
                     <div className='borders'>
                         <a href="#"><i className='bx bx-buildings'/></a>
                     </div>
-                    <h4>Find Matches</h4>
+                    <h4>Post Jobs</h4>
                 </div>
             </div>
         </section>
@@ -40,23 +45,21 @@ export const Home = () => {
             <h3>Popular Searches</h3>
             <div className='popular'>
                 <div className="jobs">
-                    <img src={software} alt="Software Engineer" width={50}/>
+                    {/* <img src={software} alt="Software Engineer" width={50}/> */}
+                    <FontAwesomeIcon icon={faLaptop} size="lg" />
                     <a href="#">Software Engineer</a>
                 </div>
                 <div className="jobs">
-                    <img src={data} alt="Data Scientist" width={50}/>
-                    <a href="#">Data Engineering</a>
-                </div>
-                <div className="jobs">
-                    <img src={sales} alt="Sales" width={40}/>
+                    {/* <img src={sales} alt="Sales" width={40}/> */}
+                    <FontAwesomeIcon icon={faCartShopping} size="lg" />
                     <a href="#">Sales</a>
                 </div>
                 <div className="jobs">
-                    <img src={marketing} alt="Marketing" width={40}/>
+                    <FontAwesomeIcon icon={faMicrophone} size="lg" />
                     <a href="#">Marketing</a>
                 </div>
                 <div className="jobs">
-                    <img src={customer} alt="Customer Service" width={50}/>
+                    <FontAwesomeIcon icon={faHeadset} size="lg" />
                     <a href="#">Customer Service</a>
                 </div>
             </div>
