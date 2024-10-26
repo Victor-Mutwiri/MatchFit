@@ -3,7 +3,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import { Home } from './pages/Home/Home';
 import { Navbar } from './components/Navbar';
 import { ToastContainer } from 'react-toastify';
-import { Userlanding } from './pages/Jobs/JobListings';
+import { JobListings } from './pages/Jobs/JobListings';
 
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path="/" element={<Home/>} />
-        <Route path='/jobs' element={<Userlanding/>}/>
+        <Route path='/jobs' element={<JobListings/>}/>
       </Routes>
       <ToastContainer/>
     </BrowserRouter>

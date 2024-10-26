@@ -28,7 +28,7 @@ const formatDateDifference = (postedDate) => {
   }
 };
 
-export const Userlanding = () => {
+export const JobListings = () => {
   const { jobType, jobs } = useJobTypes();
   const [selectedCategory, setSelectedCategory] = useState(null);
 
@@ -56,17 +56,20 @@ export const Userlanding = () => {
       </div>
       <div>
         <h3>Latest Jobs</h3>
-        {filteredJobs.map((job) => (
-          <div className="job-list" key={job.id}>
-            <img src={job.attributes.Logo} alt="logo" className="company-logo"/>
-            <div className="description">
-              <h4>{job.attributes.Company}</h4>
-              <h5>{job.attributes.Position}</h5>
-              <h5>{formatDateDifference(job.attributes.Posted)}</h5> {/* Use the helper function here */}
+        <div className="job-list-container">
+          {filteredJobs.map((job) => (
+            <div className="job-list" key={job.id}>
+              <img src={job.attributes.Logo} alt="logo" className="company-logo"/>
+              <div className="description">
+                <h4>{job.attributes.Company}</h4>
+                <h5>{job.attributes.Position}</h5>
+                <h5>{formatDateDifference(job.attributes.Posted)}</h5> {/* Use the helper function here */}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
+
     </div>
   );
 };
