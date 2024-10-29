@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './JobDescription.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { FiMapPin, FiBriefcase, FiArrowRight } from 'react-icons/fi';
 
 const JobDetail = () => {
   const { id } = useParams();
@@ -18,7 +19,6 @@ const JobDetail = () => {
         console.log(error);
       }
     };
-
     fetchJobData();
   }, [id]);
 
@@ -46,8 +46,8 @@ const JobDetail = () => {
         <div>
           {Position && <h1>{Position}</h1>}
           {Company && <p className="company-name">{Company}</p>}
-          {Location && <p className="location">{Location}</p>}
-          {jobtype?.data?.attributes?.Type && <p className="job-type">{jobtype.data.attributes.Type}</p>}
+          {Location && <p className="location"><FiMapPin /> {Location}</p>}
+          {jobtype?.data?.attributes?.Type && <p className="job-type"><FiBriefcase /> {jobtype.data.attributes.Type}</p>}
           {job_industry?.data?.attributes?.Industry && <p className="industry">{job_industry.data.attributes.Industry}</p>}
         </div>
       </div>
@@ -83,7 +83,7 @@ const JobDetail = () => {
         {Posted && <p>Posted on: {new Date(Posted).toLocaleDateString()}</p>}
         {LinkApplication && (
           <a href={LinkApplication} target="_blank" rel="noopener noreferrer" className="apply-button">
-            Apply Now
+            Apply Now <FiArrowRight />
           </a>
         )}
       </div>
