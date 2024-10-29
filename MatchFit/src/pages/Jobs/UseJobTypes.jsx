@@ -21,7 +21,6 @@ export const useJobTypes = () => {
         try {
             const baseUrl = import.meta.env.DEV ? import.meta.env.VITE_DEV_API_BASE_URL : import.meta.env.VITE_PROD_API_BASE_URL;
             const {data:{data}} = await axios.get(`${baseUrl}/jobs?populate=*`)
-            /* const {data:{data}} = await axios.get('http://localhost:1337/api/jobs?populate=*') */
             setJobs(data)
         } catch (error) {
             console.log(error)

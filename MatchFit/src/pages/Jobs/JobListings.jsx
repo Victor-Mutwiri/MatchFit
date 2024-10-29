@@ -31,7 +31,7 @@ const formatDateDifference = (postedDate) => {
 };
 
 export const JobListings = () => {
-  const { jobType, jobs } = useJobTypes();
+  const { jobs } = useJobTypes();
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const handleSelectCategory = (categoryId) => {
@@ -42,9 +42,13 @@ export const JobListings = () => {
     setSelectedCategory(null);
   };
 
+  /* console.log(jobs); */
+
   const filteredJobs = selectedCategory
     ? jobs.filter(job => job.attributes.job_industry?.data?.id === selectedCategory)
     : jobs;
+
+    /* console.log(filteredJobs); */
 
   return (
     <div className="Userlanding">

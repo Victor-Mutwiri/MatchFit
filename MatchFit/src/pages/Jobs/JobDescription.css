@@ -1,7 +1,8 @@
 .job-detail-container {
     width: 80%;
-    margin: 0 auto;
-    padding: 20px;
+    /* margin: 0 auto; */
+    margin: 5rem auto;
+    padding: 2rem;
     background-color: #f8f9fa;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -30,6 +31,10 @@
     font-size: 20px;
     margin-top: 16px;
     color: #343a40;
+}
+
+.job-footer{
+    margin-top: 20px;
 }
 
 .apply-button {
