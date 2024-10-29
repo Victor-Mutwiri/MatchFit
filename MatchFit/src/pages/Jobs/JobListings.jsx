@@ -2,13 +2,15 @@ import { useJobTypes } from "./UseJobTypes";
 import './JobListings.css';
 import Categories from "../../components/Categories/Categories";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 // Helper function to calculate the time difference and format it
 const formatDateDifference = (postedDate) => {
   const currentDate = new Date();
   const jobDate = new Date(postedDate);
-  const diffTime = Math.abs(currentDate - jobDate); // Time difference in milliseconds
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)); // Convert to days
+  const diffTime = Math.abs(currentDate - jobDate);
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
   if (diffDays === 0) {
     return "Today";
@@ -58,18 +60,37 @@ export const JobListings = () => {
         <h3>Latest Jobs</h3>
         <div className="job-list-container">
           {filteredJobs.map((job) => (
-            <div className="job-list" key={job.id}>
-              <img src={job.attributes.Logo} alt="logo" className="company-logo"/>
-              <div className="description">
-                <h4>{job.attributes.Company}</h4>
-                <h5>{job.attributes.Position}</h5>
-                <h5>{formatDateDifference(job.attributes.Posted)}</h5> {/* Use the helper function here */}
+            <Link to={`/job/${job.id}`} className="job-link" key={job.id}>
+              <div className="job-list">
+                <img src={job.attributes.Logo} alt="logo" className="company-logo" />
+                <div className="description">
+                  <h4>{job.attributes.Company}</h4>
+                  <h5>{job.attributes.Position}</h5>
+                  <h5>{formatDateDifference(job.attributes.Posted)}</h5>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
-
     </div>
   );
+};
+
+// PropTypes for JobListings
+JobListings.propTypes = {
+  jobs: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    attributes: PropTypes.shape({
+      Company: PropTypes.string,
+      Position: PropTypes.string,
+      Posted: PropTypes.string,
+      Logo: PropTypes.string,
+      job_industry: PropTypes.shape({
+        data: PropTypes.shape({
+          id: PropTypes.number
+        })
+      })
+    }).isRequired
+  }))
 };
