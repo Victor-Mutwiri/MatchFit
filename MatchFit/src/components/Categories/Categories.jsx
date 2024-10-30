@@ -14,7 +14,6 @@ const Categories = ({ onSelectCategory }) => {
         : import.meta.env.VITE_PROD_API_BASE_URL;
       const { data: { data } } = await axios.get(`${baseUrl}/job-industries`);
 
-      // Save to both state and localStorage
       setCategory(data);
       localStorage.setItem("jobCategories", JSON.stringify(data));
     } catch (error) {
@@ -23,7 +22,6 @@ const Categories = ({ onSelectCategory }) => {
   };
 
   useEffect(() => {
-    // Check if categories are already in localStorage
     const savedCategories = localStorage.getItem("jobCategories");
     if (savedCategories) {
       setCategory(JSON.parse(savedCategories));
@@ -35,6 +33,11 @@ const Categories = ({ onSelectCategory }) => {
   const handleSelectCategory = (categoryId) => {
     setSelectedCategoryId(categoryId);
     onSelectCategory(categoryId);
+  };
+
+  const handleClearFilter = () => {
+    setSelectedCategoryId(null);
+    onSelectCategory(null);
   };
 
   return (
@@ -51,6 +54,9 @@ const Categories = ({ onSelectCategory }) => {
           </div>
         ))}
       </div>
+      {selectedCategoryId && (
+        <button onClick={handleClearFilter} className="clear-filter-button">Clear Filter</button>
+      )}
     </div>
   );
 };

@@ -28,19 +28,17 @@ export const JobListings = () => {
   useEffect(() => {
     const cachedJobs = JSON.parse(localStorage.getItem('cachedJobs'));
 
-    if (cachedJobs) {
+    if (cachedJobs && cachedJobs.length > 0) {
       setJobs(cachedJobs);
     } else if (initialJobs && initialJobs.length > 0) {
       setJobs(initialJobs);
       localStorage.setItem('cachedJobs', JSON.stringify(initialJobs));
     } else if (!jobsLoading) {
-      // Fetch jobs if no cache and initialJobs are empty
-      setJobs([]); // Fallback in case jobs fetch fails
+      setJobs([]); // Fallback state to indicate jobs are being loaded
     }
   }, [initialJobs, jobsLoading]);
 
   const handleSelectCategory = (categoryId) => setSelectedCategory(categoryId);
-  const handleClearFilter = () => setSelectedCategory(null);
 
   const filteredJobs = selectedCategory
     ? jobs?.filter(job => job.attributes.job_industry?.data?.id === selectedCategory)
@@ -49,13 +47,10 @@ export const JobListings = () => {
   return (
     <div className="Userlanding">
       <Categories onSelectCategory={handleSelectCategory} />
-      {selectedCategory && (
-        <button onClick={handleClearFilter} className="clear-filter-button">Clear Filter</button>
-      )}
       <div>
         <h3>Latest Jobs</h3>
         <div className="job-list-container">
-          {!jobs && jobsLoading ? (
+          {jobsLoading ? (
             Array.from({ length: 5 }).map((_, idx) => <SkeletonJob key={idx} />)
           ) : jobs?.length ? (
             filteredJobs.map((job) => (
@@ -71,7 +66,7 @@ export const JobListings = () => {
               </Link>
             ))
           ) : (
-            <p>No jobs available at the moment. Please check back later.</p>
+            <p>Loading jobs... Please wait a moment.</p>
           )}
         </div>
       </div>

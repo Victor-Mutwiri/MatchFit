@@ -1,5 +1,5 @@
 .categories-container {
-    /* padding: 20px */;
+    /* padding: 20px */
     /* background-color: #f5f5f5; */
     border-radius: 8px;
     max-width: 300px;
@@ -45,5 +45,21 @@
   
   .category-item:active {
     transform: scale(0.98);  /* Slight shrink effect on click */
+  }
+
+  .clear-filter-button {
+    margin-top: 1rem;
+    padding: 10px 20px;
+    font-size: 14px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .clear-filter-button:hover {
+    background-color: #0056b3;
   }
   
