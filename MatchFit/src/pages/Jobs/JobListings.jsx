@@ -32,16 +32,29 @@ export const JobListings = () => {
       return jobList.sort((a, b) => new Date(b.attributes.Posted) - new Date(a.attributes.Posted));
     };
   
-    if (cachedJobs && cachedJobs.length > 0) {
-      setJobs(sortByPostedDate(cachedJobs));
-    } else if (initialJobs && initialJobs.length > 0) {
+    // Check if cached jobs exist and if they are up-to-date with initialJobs
+    if (initialJobs && initialJobs.length > 0) {
       const sortedJobs = sortByPostedDate(initialJobs);
-      setJobs(sortedJobs);
-      localStorage.setItem('cachedJobs', JSON.stringify(sortedJobs));
+  
+      // Compare cached jobs with new jobs
+      if (
+        !cachedJobs ||
+        cachedJobs.length !== sortedJobs.length ||
+        cachedJobs[0]?.id !== sortedJobs[0]?.id // Assumes that jobs array is sorted
+      ) {
+        // Update cache with the latest jobs if there's a difference
+        setJobs(sortedJobs);
+        localStorage.setItem('cachedJobs', JSON.stringify(sortedJobs));
+      } else {
+        setJobs(sortByPostedDate(cachedJobs));
+      }
+    } else if (cachedJobs && cachedJobs.length > 0) {
+      setJobs(sortByPostedDate(cachedJobs));
     } else if (!jobsLoading) {
       setJobs([]); // Fallback state to indicate jobs are being loaded
     }
   }, [initialJobs, jobsLoading]);
+  
   
 
   const handleSelectCategory = (categoryId) => setSelectedCategory(categoryId);
