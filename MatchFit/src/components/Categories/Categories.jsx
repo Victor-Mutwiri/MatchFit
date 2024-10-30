@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import './Categories.css';  // Import the CSS file for styling
+import './Categories.css';
 
 const Categories = ({ onSelectCategory }) => {
   const [category, setCategory] = useState([]);
@@ -13,18 +13,27 @@ const Categories = ({ onSelectCategory }) => {
         ? import.meta.env.VITE_DEV_API_BASE_URL
         : import.meta.env.VITE_PROD_API_BASE_URL;
       const { data: { data } } = await axios.get(`${baseUrl}/job-industries`);
+
+      // Save to both state and localStorage
       setCategory(data);
+      localStorage.setItem("jobCategories", JSON.stringify(data));
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    fetchCategory();
+    // Check if categories are already in localStorage
+    const savedCategories = localStorage.getItem("jobCategories");
+    if (savedCategories) {
+      setCategory(JSON.parse(savedCategories));
+    } else {
+      fetchCategory();
+    }
   }, []);
 
   const handleSelectCategory = (categoryId) => {
-    setSelectedCategoryId(categoryId);  // Store the selected category ID
+    setSelectedCategoryId(categoryId);
     onSelectCategory(categoryId);
   };
 
@@ -35,7 +44,7 @@ const Categories = ({ onSelectCategory }) => {
         {category.map((item) => (
           <div
             key={item.id}
-            className={`category-item ${selectedCategoryId === item.id ? 'selected' : ''}`}  // Add selected class if applicable
+            className={`category-item ${selectedCategoryId === item.id ? 'selected' : ''}`}
             onClick={() => handleSelectCategory(item.id)}
           >
             <h5>{item.attributes.Industry}</h5>

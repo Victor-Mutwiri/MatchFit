@@ -1,6 +1,7 @@
 import { useJobTypes } from "./UseJobTypes";
 import './JobListings.css';
 import Categories from "../../components/Categories/Categories";
+import SkeletonJob from "./SkeletonJob";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -32,14 +33,13 @@ const formatDateDifference = (postedDate) => {
 
 export const JobListings = () => {
   const { jobs: initialJobs } = useJobTypes();
-  const [jobs, setJobs] = useState(initialJobs || []);
+  const [jobs, setJobs] = useState(null); // Start with `null` to indicate loading state
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  // Store jobs in localStorage or in-memory cache
   useEffect(() => {
     const cachedJobs = JSON.parse(localStorage.getItem('cachedJobs'));
-    if (!cachedJobs || cachedJobs.length === 0) {
-      setJobs(initialJobs); // Only set if data hasn't been loaded previously
+    if (!cachedJobs) {
+      setJobs(initialJobs || []);
       localStorage.setItem('cachedJobs', JSON.stringify(initialJobs));
     } else {
       setJobs(cachedJobs);
@@ -50,35 +50,35 @@ export const JobListings = () => {
   const handleClearFilter = () => setSelectedCategory(null);
 
   const filteredJobs = selectedCategory
-    ? jobs.filter(job => job.attributes.job_industry?.data?.id === selectedCategory)
+    ? jobs?.filter(job => job.attributes.job_industry?.data?.id === selectedCategory)
     : jobs;
 
   return (
     <div className="Userlanding">
-      <div>
-        <Categories onSelectCategory={handleSelectCategory} />
-        {selectedCategory && (
-          <button onClick={handleClearFilter} className="clear-filter-button">
-            Clear Filter
-          </button>
-        )}
-      </div>
+      <Categories onSelectCategory={handleSelectCategory} />
+      {selectedCategory && (
+        <button onClick={handleClearFilter} className="clear-filter-button">Clear Filter</button>
+      )}
       <div>
         <h3>Latest Jobs</h3>
         <div className="job-list-container">
-          {filteredJobs.map((job) => (
-            <Link to={`/job/${job.id}`} className="job-link" key={job.id}>
-              <div className="job-list">
-                <img src={job.attributes.Logo} alt="logo" className="company-logo" />
-                <div className="description">
-                  <h4>{job.attributes.Company}</h4>
-                  <h5>{job.attributes.Position}</h5>
-                  <h5>{formatDateDifference(job.attributes.Posted)}</h5>
+          {!jobs ? (
+            Array.from({ length: 5 }).map((_, idx) => <SkeletonJob key={idx} />) // Render 5 skeletons while loading
+          ) : (
+            filteredJobs.map((job) => (
+              <Link to={`/job/${job.id}`} className="job-link" key={job.id}>
+                <div className="job-list">
+                  <img src={job.attributes.Logo} alt="logo" className="company-logo" />
+                  <div className="description">
+                    <h4>{job.attributes.Company}</h4>
+                    <h5>{job.attributes.Position}</h5>
+                    <h5>{formatDateDifference(job.attributes.Posted)}</h5>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))
+        )}
+      </div>
       </div>
     </div>
   );
