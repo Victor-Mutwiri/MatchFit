@@ -27,16 +27,22 @@ export const JobListings = () => {
 
   useEffect(() => {
     const cachedJobs = JSON.parse(localStorage.getItem('cachedJobs'));
-
+  
+    const sortByPostedDate = (jobList) => {
+      return jobList.sort((a, b) => new Date(b.attributes.Posted) - new Date(a.attributes.Posted));
+    };
+  
     if (cachedJobs && cachedJobs.length > 0) {
-      setJobs(cachedJobs);
+      setJobs(sortByPostedDate(cachedJobs));
     } else if (initialJobs && initialJobs.length > 0) {
-      setJobs(initialJobs);
-      localStorage.setItem('cachedJobs', JSON.stringify(initialJobs));
+      const sortedJobs = sortByPostedDate(initialJobs);
+      setJobs(sortedJobs);
+      localStorage.setItem('cachedJobs', JSON.stringify(sortedJobs));
     } else if (!jobsLoading) {
       setJobs([]); // Fallback state to indicate jobs are being loaded
     }
   }, [initialJobs, jobsLoading]);
+  
 
   const handleSelectCategory = (categoryId) => setSelectedCategory(categoryId);
 
