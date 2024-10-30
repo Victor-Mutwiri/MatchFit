@@ -22,7 +22,7 @@ const formatDateDifference = (postedDate) => {
 
 export const JobListings = () => {
   const { jobs: initialJobs, isLoading: jobsLoading } = useJobTypes();
-  const [jobs, setJobs] = useState(null); // null indicates loading
+  const [jobs, setJobs] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
@@ -33,8 +33,11 @@ export const JobListings = () => {
     } else if (initialJobs && initialJobs.length > 0) {
       setJobs(initialJobs);
       localStorage.setItem('cachedJobs', JSON.stringify(initialJobs));
+    } else if (!jobsLoading) {
+      // Fetch jobs if no cache and initialJobs are empty
+      setJobs([]); // Fallback in case jobs fetch fails
     }
-  }, [initialJobs]);
+  }, [initialJobs, jobsLoading]);
 
   const handleSelectCategory = (categoryId) => setSelectedCategory(categoryId);
   const handleClearFilter = () => setSelectedCategory(null);
@@ -53,7 +56,7 @@ export const JobListings = () => {
         <h3>Latest Jobs</h3>
         <div className="job-list-container">
           {!jobs && jobsLoading ? (
-            Array.from({ length: 5 }).map((_, idx) => <SkeletonJob key={idx} />) // Show loading skeletons
+            Array.from({ length: 5 }).map((_, idx) => <SkeletonJob key={idx} />)
           ) : jobs?.length ? (
             filteredJobs.map((job) => (
               <Link to={`/job/${job.id}`} className="job-link" key={job.id}>
