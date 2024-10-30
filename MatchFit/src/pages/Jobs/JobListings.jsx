@@ -6,43 +6,33 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-// Helper function to calculate the time difference and format it
 const formatDateDifference = (postedDate) => {
   const currentDate = new Date();
   const jobDate = new Date(postedDate);
   const diffTime = Math.abs(currentDate - jobDate);
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-  if (diffDays === 0) {
-    return "Today";
-  } else if (diffDays === 1) {
-    return "1 day ago";
-  } else if (diffDays < 7) {
-    return `${diffDays} days ago`;
-  } else if (diffDays < 30) {
-    const weeks = Math.floor(diffDays / 7);
-    return weeks === 1 ? "1 week ago" : `${weeks} weeks ago`;
-  } else if (diffDays < 365) {
-    const months = Math.floor(diffDays / 30);
-    return months === 1 ? "1 month ago" : `${months} months ago`;
-  } else {
-    const years = Math.floor(diffDays / 365);
-    return years === 1 ? "1 year ago" : `${years} years ago`;
-  }
+  if (diffDays === 0) return "Today";
+  if (diffDays === 1) return "1 day ago";
+  if (diffDays < 7) return `${diffDays} days ago`;
+  if (diffDays < 30) return `${Math.floor(diffDays / 7)} week(s) ago`;
+  if (diffDays < 365) return `${Math.floor(diffDays / 30)} month(s) ago`;
+  return `${Math.floor(diffDays / 365)} year(s) ago`;
 };
 
 export const JobListings = () => {
-  const { jobs: initialJobs } = useJobTypes();
-  const [jobs, setJobs] = useState(null); // Start with `null` to indicate loading state
+  const { jobs: initialJobs, isLoading: jobsLoading } = useJobTypes();
+  const [jobs, setJobs] = useState(null); // null indicates loading
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
     const cachedJobs = JSON.parse(localStorage.getItem('cachedJobs'));
-    if (!cachedJobs) {
-      setJobs(initialJobs || []);
-      localStorage.setItem('cachedJobs', JSON.stringify(initialJobs));
-    } else {
+
+    if (cachedJobs) {
       setJobs(cachedJobs);
+    } else if (initialJobs && initialJobs.length > 0) {
+      setJobs(initialJobs);
+      localStorage.setItem('cachedJobs', JSON.stringify(initialJobs));
     }
   }, [initialJobs]);
 
@@ -62,9 +52,9 @@ export const JobListings = () => {
       <div>
         <h3>Latest Jobs</h3>
         <div className="job-list-container">
-          {!jobs ? (
-            Array.from({ length: 5 }).map((_, idx) => <SkeletonJob key={idx} />) // Render 5 skeletons while loading
-          ) : (
+          {!jobs && jobsLoading ? (
+            Array.from({ length: 5 }).map((_, idx) => <SkeletonJob key={idx} />) // Show loading skeletons
+          ) : jobs?.length ? (
             filteredJobs.map((job) => (
               <Link to={`/job/${job.id}`} className="job-link" key={job.id}>
                 <div className="job-list">
@@ -77,8 +67,10 @@ export const JobListings = () => {
                 </div>
               </Link>
             ))
-        )}
-      </div>
+          ) : (
+            <p>No jobs available at the moment. Please check back later.</p>
+          )}
+        </div>
       </div>
     </div>
   );
