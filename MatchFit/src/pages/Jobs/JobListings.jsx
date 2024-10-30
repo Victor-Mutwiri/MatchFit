@@ -1,7 +1,7 @@
 import { useJobTypes } from "./UseJobTypes";
 import './JobListings.css';
 import Categories from "../../components/Categories/Categories";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -31,24 +31,27 @@ const formatDateDifference = (postedDate) => {
 };
 
 export const JobListings = () => {
-  const { jobs } = useJobTypes();
+  const { jobs: initialJobs } = useJobTypes();
+  const [jobs, setJobs] = useState(initialJobs || []);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  const handleSelectCategory = (categoryId) => {
-    setSelectedCategory(categoryId);
-  };
+  // Store jobs in localStorage or in-memory cache
+  useEffect(() => {
+    const cachedJobs = JSON.parse(localStorage.getItem('cachedJobs'));
+    if (!cachedJobs || cachedJobs.length === 0) {
+      setJobs(initialJobs); // Only set if data hasn't been loaded previously
+      localStorage.setItem('cachedJobs', JSON.stringify(initialJobs));
+    } else {
+      setJobs(cachedJobs);
+    }
+  }, [initialJobs]);
 
-  const handleClearFilter = () => {
-    setSelectedCategory(null);
-  };
-
-  /* console.log(jobs); */
+  const handleSelectCategory = (categoryId) => setSelectedCategory(categoryId);
+  const handleClearFilter = () => setSelectedCategory(null);
 
   const filteredJobs = selectedCategory
     ? jobs.filter(job => job.attributes.job_industry?.data?.id === selectedCategory)
     : jobs;
-
-    /* console.log(filteredJobs); */
 
   return (
     <div className="Userlanding">
@@ -81,7 +84,6 @@ export const JobListings = () => {
   );
 };
 
-// PropTypes for JobListings
 JobListings.propTypes = {
   jobs: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,

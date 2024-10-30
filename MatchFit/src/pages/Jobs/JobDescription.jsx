@@ -11,12 +11,20 @@ const JobDetail = () => {
 
   useEffect(() => {
     const fetchJobData = async () => {
-      try {
-        const baseUrl = import.meta.env.DEV ? import.meta.env.VITE_DEV_API_BASE_URL : import.meta.env.VITE_PROD_API_BASE_URL;
-        const { data: { data } } = await axios.get(`${baseUrl}/jobs/${id}?populate=*`);
-        setJob(data);
-      } catch (error) {
-        console.log(error);
+      // Check cache before fetching
+      const cachedJobs = JSON.parse(localStorage.getItem('cachedJobs'));
+      const cachedJob = cachedJobs?.find(job => job.id === id);
+
+      if (cachedJob) {
+        setJob(cachedJob);
+      } else {
+        try {
+          const baseUrl = import.meta.env.DEV ? import.meta.env.VITE_DEV_API_BASE_URL : import.meta.env.VITE_PROD_API_BASE_URL;
+          const { data: { data } } = await axios.get(`${baseUrl}/jobs/${id}?populate=*`);
+          setJob(data);
+        } catch (error) {
+          console.log(error);
+        }
       }
     };
     fetchJobData();
