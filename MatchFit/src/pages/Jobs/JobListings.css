@@ -3,7 +3,7 @@
   flex-direction: row; */
   display: grid;
   grid-template-columns: 1fr 2fr;
-  margin-top: 0rem;
+  /* margin-top: 0rem; */
   padding: 4rem 5rem;
   background-color: #f9f9f9;
 }

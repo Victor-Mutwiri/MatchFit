@@ -76,6 +76,40 @@
     transform: translateY(-3px);
 }
 
+.job-body ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .job-body ul li {
+    position: relative;
+    padding-left: 1.5em;
+    margin-bottom: 0.5em;
+    font-size: 1rem;
+  }
+  
+  .job-body ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.3em;
+    width: 0.4em;
+    height: 0.4em;
+    background-color: #333; /* Change color to match your design */
+    border-radius: 50%; /* Rounded dot */
+  }
+
+  .read-more {
+    color: #007bff;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .read-more:hover {
+    text-decoration: underline;
+  }
+  
+  
+
 /* Mobile Responsiveness */
 @media (max-width: 600px) {
     .job-detail-container {

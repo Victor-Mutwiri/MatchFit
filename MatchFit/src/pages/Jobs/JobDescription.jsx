@@ -8,6 +8,7 @@ import { FiMapPin, FiBriefcase, FiArrowRight } from 'react-icons/fi';
 const JobDetail = () => {
   const { id } = useParams();
   const [job, setJob] = useState(null);
+  const [showFullOverview, setShowFullOverview] = useState(false);
 
   useEffect(() => {
     const fetchJobData = async () => {
@@ -47,6 +48,17 @@ const JobDetail = () => {
     job_industry
   } = job.attributes;
 
+  // Split Overview into sentences
+  const overviewSentences = Overview?.split('.').map(sentence => sentence.trim()).filter(Boolean);
+  const isOverviewLong = overviewSentences?.length > 3;
+  const displayedOverview = isOverviewLong && !showFullOverview
+    ? overviewSentences.slice(0, 3).join('. ') + '.'
+    : Overview;
+
+  // Split Qualifications and responsibilities into separate sentences
+  const qualificationsList = Qualifications?.split('.').map(q => q.trim()).filter(Boolean);
+  const responsibilitiesList = Responsibilities?.split('.').map(q => q.trim()).filter(Boolean);
+
   return (
     <div className="job-detail-container">
       <div className="job-header">
@@ -64,19 +76,37 @@ const JobDetail = () => {
         {Overview && (
           <>
             <h2>Overview</h2>
-            <p>{Overview}</p>
+            <p>
+              {displayedOverview}
+              {isOverviewLong && (
+                <span
+                  className="read-more"
+                  onClick={() => setShowFullOverview(!showFullOverview)}
+                >
+                  {showFullOverview ? ' Show less' : ' Read more'}
+                </span>
+              )}
+            </p>
           </>
         )}
         {Responsibilities && (
           <>
             <h2>Responsibilities</h2>
-            <p>{Responsibilities}</p>
+            <ul>
+              {responsibilitiesList.map((responsibility, index) => (
+                <li key={index}>{responsibility}</li>
+              ))}
+            </ul>
           </>
         )}
         {Qualifications && (
           <>
             <h2>Qualifications</h2>
-            <p>{Qualifications}</p>
+            <ul>
+              {qualificationsList.map((qualification, index) => (
+                <li key={index}>{qualification}</li>
+              ))}
+            </ul>
           </>
         )}
         {Experience && (
