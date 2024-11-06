@@ -1,5 +1,6 @@
 import './Home.css'
 import interview from '../../assets/interview.jpg'
+import meeting from '../../assets/Black People.png'
 import software from '../../assets/Code.jpg'
 import data from '../../assets/Data.jpg'
 import sales from '../../assets/Sales.jpg'
@@ -15,17 +16,11 @@ export const Home = () => {
   return (
     <div className="home">
         <h2>Connecting Talent with Opportunity</h2>
-        <section className="top">
-            <img src={interview} alt="interview" width={350}/>
-            <div>
-                <h4>Let's Find Jobs for You</h4>
-                <p>Any industry. Any location. Any experience level.</p>
-            </div>
-        </section>
-        <hr />
+        
+        {/* <hr /> */}
         <section className="middle">
-            <h3>Job search made easy on MatchFit</h3>
-            <p>Delivering curated insights and confidential dialogue, empowering your journey to success</p>
+            {/* <h3>Job search made easy on MatchFit</h3>
+            <p>Delivering curated insights and confidential dialogue, empowering your journey to success</p> */}
             <div className='icons'>
                 <div>
                     <div className='borders'>
@@ -39,6 +34,13 @@ export const Home = () => {
                     </div>
                     <h4>Post Jobs</h4>
                 </div>
+            </div>
+        </section>
+        <section className="top">
+            {/* <img src={interview} alt="interview" width={350}/> */}
+            <div>
+                <h4>Let's Find Jobs for You</h4>
+                <p>Any industry. Any location. Any experience level.</p>
             </div>
         </section>
         <section className="bottom">
