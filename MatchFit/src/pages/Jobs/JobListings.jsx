@@ -90,27 +90,26 @@ export const JobListings = () => {
         <div>
           <h4>Showing results</h4>
           <div className="job-list-container">
-            {jobsLoading ? (
-              Array.from({ length: 5 }).map((_, idx) => <SkeletonJob key={idx} />)
-            ) : jobs?.length ? (
-              filteredJobs.map((job) => (
-                <Link to={`/job/${job.id}`} className="job-link" key={job.id}>
-                  <div className="job-list">
-                    <div className="details">
-                      <img src={job.attributes.Logo} alt="logo" className="company-logo" />
-                      <div className="description">
-                        <h4>{job.attributes.Position}</h4>
-                        <h5>{job.attributes.Company}</h5>
-                      </div>
-                      {/* <h5><FiMapPin />{job.attributes.Location}</h5> */}
+          {jobsLoading ? (
+            Array.from({ length: 5 }).map((_, idx) => <SkeletonJob key={idx} />)
+          ) : displayedJobs?.length ? (
+            displayedJobs.map((job) => (
+              <Link to={`/job/${job.id}`} className="job-link" key={job.id}>
+                <div className="job-list">
+                  <div className="details">
+                    <img src={job.attributes.Logo} alt="logo" className="company-logo" />
+                    <div className="description">
+                      <h4>{job.attributes.Position}</h4>
+                      <h5>{job.attributes.Company}</h5>
                     </div>
-                    <h5>{formatDateDifference(job.attributes.Posted)}</h5>
                   </div>
-                </Link>
-              ))
-            ) : (
-              <p>Loading jobs... Please wait a moment.</p>
-            )}
+                  <h5>{formatDateDifference(job.attributes.Posted)}</h5>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <p>No jobs available for this category.</p>
+          )}
           </div>
           <div className="pagination">
             <button onClick={previousPage} disabled={currentPage === 1}>
