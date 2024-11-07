@@ -1,69 +1,60 @@
-header{
-    position: fixed;
+/* Navbar.css */
+
+header {
     display: flex;
-    justify-content: space-evenly;
     align-items: center;
-    background-color: #50c878;
-    /* background-color: #34da97; */
-    color: white;
-    padding: 15px;
-    width: 100%;
-    /* z-index: 100; */
-    top: 0;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-}
-.left{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 20px;
-}
-div li{
-    font-size: 20px;
-    list-style: none;
-    margin: 0 10px;
-}
-div li a{
-    text-decoration: none;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: transparent;
     color: #fff;
-    justify-content: center;
-}
-.center{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 20px;
-}
-.center-mobile{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
 }
 
-.right{
+.mainlogo img {
+    width: 140px;
+}
+
+header div {
+    display: flex;
+    align-items: center;
+}
+
+header li {
+    list-style: none;
+    margin-left: 2rem;
+}
+
+header li a {
+    /* color: #fff; */
+    color: #50c878;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+header li a:hover {
+    color: #4DB5FF; /* Hover color for links */
+}
+
+.bx-menu {
     display: none;
-    font-size: 30px;
-    margin: 0 10px;
+    font-size: 1.5rem;
+    color: #fff;
+    cursor: pointer;
 }
 
-@media (max-width: 640px){
-    header{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-    header .logo img{
-        width: 100px;
-    }
-    header .left{
-        gap: 10px;
-    } 
-    header .left-options{
-        display: none;
-    }
-    header .center{
-        display: none;
+/* Responsive Navbar */
+@media (max-width: 768px) {
+    header div {
+        display: none; /* Hide navbar links on small screens */
     }
 
+    .bx-menu {
+        display: block; /* Show menu icon */
+    }
 }
