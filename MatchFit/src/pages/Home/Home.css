@@ -15,7 +15,7 @@
     color: #50c878;
     /* color: #34da97; */
     margin-top: 5rem;
-    margin-bottom: 5rem;
+    margin-bottom: 3rem;
 }
 .home hr{
     width: 100%;
@@ -61,7 +61,7 @@
     justify-content: center;
     gap: 20px;
     margin-top: 1rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 }
 .top div{
     display: flex;

@@ -42,7 +42,7 @@ const Categories = ({ onSelectCategory }) => {
 
   return (
     <div className="categories-container">
-      <h3 className="categories-title">Filter by Industry</h3>
+      <h4 className="categories-title">Search by Industry</h4>
       <div className="categories-list">
         {category.map((item) => (
           <div

@@ -5,6 +5,7 @@ import SkeletonJob from "./SkeletonJob";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { FiMapPin } from 'react-icons/fi';
 
 const formatDateDifference = (postedDate) => {
   const currentDate = new Date();
@@ -15,15 +16,18 @@ const formatDateDifference = (postedDate) => {
   if (diffDays === 0) return "Today";
   if (diffDays === 1) return "Yesterday";
   if (diffDays < 7) return `${diffDays} days ago`;
-  if (diffDays < 30) return `${Math.floor(diffDays / 7)} week(s) ago`;
-  if (diffDays < 365) return `${Math.floor(diffDays / 30)} month(s) ago`;
-  return `${Math.floor(diffDays / 365)} year(s) ago`;
+  if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
+  if (diffDays < 365) return `${Math.floor(diffDays / 30)} months ago`;
+  return `${Math.floor(diffDays / 365)} years ago`;
 };
+
+const JOBS_PER_PAGE = 10;
 
 export const JobListings = () => {
   const { jobs: initialJobs, isLoading: jobsLoading } = useJobTypes();
   const [jobs, setJobs] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const cachedJobs = JSON.parse(localStorage.getItem('cachedJobs'));
@@ -63,30 +67,60 @@ export const JobListings = () => {
     ? jobs?.filter(job => job.attributes.job_industry?.data?.id === selectedCategory)
     : jobs;
 
+  
+    const displayedJobs = filteredJobs?.slice((currentPage - 1) * JOBS_PER_PAGE, currentPage * JOBS_PER_PAGE);
+
+    const totalPages = Math.ceil((filteredJobs?.length || 0) / JOBS_PER_PAGE);
+  
+    const nextPage = () => {
+      if (currentPage < totalPages) setCurrentPage(prev => prev + 1);
+    };
+  
+    const previousPage = () => {
+      if (currentPage > 1) setCurrentPage(prev => prev - 1);
+    };
+
   return (
-    <div className="Userlanding">
-      <Categories onSelectCategory={handleSelectCategory} />
-      <div>
-        <h3>Latest Jobs</h3>
-        <div className="job-list-container">
-          {jobsLoading ? (
-            Array.from({ length: 5 }).map((_, idx) => <SkeletonJob key={idx} />)
-          ) : jobs?.length ? (
-            filteredJobs.map((job) => (
-              <Link to={`/job/${job.id}`} className="job-link" key={job.id}>
-                <div className="job-list">
-                  <img src={job.attributes.Logo} alt="logo" className="company-logo" />
-                  <div className="description">
-                    <h4>{job.attributes.Company}</h4>
-                    <h5>{job.attributes.Position}</h5>
+    <div>
+      <div className="jobs">
+        <h1>Jobs</h1>
+      </div>
+      <div className="Userlanding">
+        <Categories onSelectCategory={handleSelectCategory} />
+        <div>
+          <h4>Showing results</h4>
+          <div className="job-list-container">
+            {jobsLoading ? (
+              Array.from({ length: 5 }).map((_, idx) => <SkeletonJob key={idx} />)
+            ) : jobs?.length ? (
+              filteredJobs.map((job) => (
+                <Link to={`/job/${job.id}`} className="job-link" key={job.id}>
+                  <div className="job-list">
+                    <div className="details">
+                      <img src={job.attributes.Logo} alt="logo" className="company-logo" />
+                      <div className="description">
+                        <h4>{job.attributes.Position}</h4>
+                        <h5>{job.attributes.Company}</h5>
+                      </div>
+                      {/* <h5><FiMapPin />{job.attributes.Location}</h5> */}
+                    </div>
                     <h5>{formatDateDifference(job.attributes.Posted)}</h5>
                   </div>
-                </div>
-              </Link>
-            ))
-          ) : (
-            <p>Loading jobs... Please wait a moment.</p>
-          )}
+                </Link>
+              ))
+            ) : (
+              <p>Loading jobs... Please wait a moment.</p>
+            )}
+          </div>
+          <div className="pagination">
+            <button onClick={previousPage} disabled={currentPage === 1}>
+              Previous
+            </button>
+            <span>Page {currentPage} of {totalPages}</span>
+            <button onClick={nextPage} disabled={currentPage === totalPages}>
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </div>
