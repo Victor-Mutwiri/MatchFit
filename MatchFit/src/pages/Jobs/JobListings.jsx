@@ -80,6 +80,9 @@ export const JobListings = () => {
       if (currentPage > 1) setCurrentPage(prev => prev - 1);
     };
 
+
+  
+
   return (
     <div>
       <div className="jobs">
@@ -93,20 +96,23 @@ export const JobListings = () => {
           {jobsLoading ? (
             Array.from({ length: 5 }).map((_, idx) => <SkeletonJob key={idx} />)
           ) : displayedJobs?.length ? (
-            displayedJobs.map((job) => (
-              <Link to={`/job/${job.id}`} className="job-link" key={job.id}>
-                <div className="job-list">
-                  <div className="details">
-                    <img src={job.attributes.Logo} alt="logo" className="company-logo" />
-                    <div className="description">
-                      <h4>{job.attributes.Position}</h4>
-                      <h5>{job.attributes.Company}</h5>
+            displayedJobs.map((job) => {
+              const nameSlug = job.attributes.Position.toLowerCase().replace(/ /g, '-');
+              return (
+                <Link to={`/job/${job.id}/${nameSlug}`} className="job-link" key={job.id}>
+                  <div className="job-list">
+                    <div className="details">
+                      <img src={job.attributes.Logo} alt="logo" className="company-logo" />
+                      <div className="description">
+                        <h4>{job.attributes.Position}</h4>
+                        <h5>{job.attributes.Company}</h5>
+                      </div>
                     </div>
+                    <h5>{formatDateDifference(job.attributes.Posted)}</h5>
                   </div>
-                  <h5>{formatDateDifference(job.attributes.Posted)}</h5>
-                </div>
-              </Link>
-            ))
+                </Link>
+              );
+            })
           ) : (
             <p>No jobs available for this category.</p>
           )}
