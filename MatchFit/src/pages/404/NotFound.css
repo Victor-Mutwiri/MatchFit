@@ -1,0 +1,24 @@
+/* NotFound.css */
+
+.not-found-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 4rem;
+    padding: 20px;
+}
+
+.error-icon {
+    font-size: 8rem;
+    color: red;
+    margin-bottom: 20px;
+}
+
+.error-message {
+    color: red;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}

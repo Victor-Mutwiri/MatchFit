@@ -17,7 +17,7 @@ export const Navbar = () => {
             <li><Link to=''>Post a Job</Link></li>
         </div> */}
         <div className="">
-            <li><Link to=''>About</Link></li>
+            <li><Link to='/about'>About</Link></li>
         </div>
         <i className='bx bx-menu right'/>
     </header>

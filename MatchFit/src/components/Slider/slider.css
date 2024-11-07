@@ -30,8 +30,8 @@
 
 .carousel-slide img {
     border-radius: 50%; /* Makes images circular */
-    width: 100px; /* Adjust the size as needed */
-    height: 100px;
+    width: 80px; /* Adjust the size as needed */
+    height: 80px;
     object-fit: fill; /* Ensure the image maintains its aspect ratio within the rounded shape */
 }
   

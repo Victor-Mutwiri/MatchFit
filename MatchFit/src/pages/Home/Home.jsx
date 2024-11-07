@@ -53,7 +53,7 @@ export const Home = () => {
             <div className='record'>
                 <FontAwesomeIcon icon={faBuilding} size="xl" className='icons'/>
                 <div>
-                    <h6><CountUp end={50} duration={5} suffix="+" /></h6>
+                    <h6><CountUp end={100} duration={5} suffix="+" /></h6>
                     <h5>Companies</h5>
                 </div>
             </div>

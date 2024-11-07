@@ -1,0 +1,124 @@
+.about-us {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* max-width: 900px; */
+    /* margin: 0 auto; */
+    padding: 2rem 2rem;
+    line-height: 1.8;
+    color: #333;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  h2, h3 {
+    color: #50c878;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  section {
+    margin: 3rem 0;
+  }
+  
+  .mission,
+  .vision,
+  .values,
+  .partners,
+  .stats {
+    margin-bottom: 3rem;
+  }
+  
+  .mission {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    width: 80%;
+  }
+  
+  .mission-image {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .mission-image:hover {
+    transform: scale(1.05);
+  }
+  
+  .mission-text {
+    /* text-align: center; */
+  }
+  
+  .values ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .values li {
+    margin: 1rem 0;
+    padding: 0.5rem;
+    background-color: #e9ecef;
+    border-radius: 8px;
+    font-weight: 500;
+  }
+  
+  .values li strong {
+    color: #50c878;
+  }
+  
+  .partners {
+    text-align: center;
+  }
+  
+  .partners p {
+    font-size: 1.1rem;
+    color: #555;
+  }
+  
+  .statz {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    background-color: #f1f3f5;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+  }
+  
+  .stat {
+    text-align: center;
+    flex: 1 1 150px;
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+  }
+  
+  .stat:hover {
+    transform: translateY(-5px);
+    background-color: #e9ecef;
+  }
+  
+  .stat h4 {
+    font-size: 2.5rem;
+    color: #50c878;
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .stat p {
+    color: #666;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+  }
+  
