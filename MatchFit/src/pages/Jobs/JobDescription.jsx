@@ -60,70 +60,110 @@ const JobDetail = () => {
   const responsibilitiesList = Responsibilities?.split('.').map(q => q.trim()).filter(Boolean);
 
   return (
-    <div className="job-detail-container">
-      <div className="job-header">
-        {Logo && <img src={Logo} alt={`${Company} logo`} className="company-logo" />}
-        <div>
-          {Position && <h1>{Position}</h1>}
-          {Company && <p className="company-name">{Company}</p>}
-          {Location && <p className="location"><FiMapPin /> {Location}</p>}
-          {jobtype?.data?.attributes?.Type && <p className="job-type"><FiBriefcase /> {jobtype.data.attributes.Type}</p>}
-          {job_industry?.data?.attributes?.Industry && <p className="industry">{job_industry.data.attributes.Industry}</p>}
+    <div className='jd'>
+      <div className="jobs">
+        <h1>Job Details</h1>
+      </div>
+      <div className='extras'>
+        <div className="job-header">
+          {Logo && <img src={Logo} alt={`${Company} logo`} className="company-logo" />}
+          <div>
+            {Position && <h1>{Position}</h1>}
+            {Company && <p className="company-name">{Company}</p>}
+            {/* <div style={{display:'flex', flexDirection:'row'}}>
+              {Location && <p className="location"><FiMapPin /> {Location}</p>}
+              {jobtype?.data?.attributes?.Type && <p className="job-type"><FiBriefcase /> {jobtype.data.attributes.Type}</p>}
+              {job_industry?.data?.attributes?.Industry && <p className="industry">{job_industry.data.attributes.Industry}</p>}
+            </div> */}
+          </div>
         </div>
-      </div>
+        <div className='extra-extra'>
+          <div className="job-detail-container">
+            {/* <div className="job-header">
+              {Logo && <img src={Logo} alt={`${Company} logo`} className="company-logo" />}
+              <div>
+                {Position && <h1>{Position}</h1>}
+                {Company && <p className="company-name">{Company}</p>}
+                {Location && <p className="location"><FiMapPin /> {Location}</p>}
+                {jobtype?.data?.attributes?.Type && <p className="job-type"><FiBriefcase /> {jobtype.data.attributes.Type}</p>}
+                {job_industry?.data?.attributes?.Industry && <p className="industry">{job_industry.data.attributes.Industry}</p>}
+              </div>
+            </div> */}
 
-      <div className="job-body">
-        {Overview && (
-          <>
-            <h2>Overview</h2>
-            <p>
-              {displayedOverview}
-              {isOverviewLong && (
-                <span
-                  className="read-more"
-                  onClick={() => setShowFullOverview(!showFullOverview)}
-                >
-                  {showFullOverview ? ' Show less' : ' Read more'}
-                </span>
+            <div className="job-body">
+              {Overview && (
+                <>
+                  <h2>Job Description</h2>
+                  <p>
+                    {displayedOverview}
+                    {isOverviewLong && (
+                      <span
+                        className="read-more"
+                        onClick={() => setShowFullOverview(!showFullOverview)}
+                      >
+                        {showFullOverview ? ' Show less' : ' Read more'}
+                      </span>
+                    )}
+                  </p>
+                </>
               )}
-            </p>
-          </>
-        )}
-        {Responsibilities && (
-          <>
-            <h2>Responsibilities</h2>
-            <ul>
-              {responsibilitiesList.map((responsibility, index) => (
-                <li key={index}>{responsibility}</li>
-              ))}
-            </ul>
-          </>
-        )}
-        {Qualifications && (
-          <>
-            <h2>Qualifications</h2>
-            <ul>
-              {qualificationsList.map((qualification, index) => (
-                <li key={index}>{qualification}</li>
-              ))}
-            </ul>
-          </>
-        )}
-        {Experience && (
-          <>
-            <h2>Experience</h2>
-            <p>{Experience} Years</p>
-          </>
-        )}
-      </div>
+              {Responsibilities && (
+                <>
+                  <h2>Responsibilities</h2>
+                  <ul>
+                    {responsibilitiesList.map((responsibility, index) => (
+                      <li key={index}>{responsibility}</li>
+                    ))}
+                  </ul>
+                </>
+              )}
+              {Qualifications && (
+                <>
+                  <h2>Qualifications / Professional Skills</h2>
+                  <ul>
+                    {qualificationsList.map((qualification, index) => (
+                      <li key={index}>{qualification}</li>
+                    ))}
+                  </ul>
+                </>
+              )}
+              {Experience && (
+                <>
+                  <h2>Experience</h2>
+                  <p>{Experience} Years</p>
+                </>
+              )}
+            </div>
 
-      <div className="job-footer">
-        {Posted && <p>Posted on: {new Date(Posted).toLocaleDateString()}</p>}
-        {LinkApplication && (
-          <a href={LinkApplication} target="_blank" rel="noopener noreferrer" className="apply-button">
-            Apply Now <FiArrowRight />
-          </a>
-        )}
+            {/* <div className="job-footer">
+              {Posted && <p>Posted on: {new Date(Posted).toLocaleDateString()}</p>}
+              {LinkApplication && (
+                <a href={LinkApplication} target="_blank" rel="noopener noreferrer" className="apply-button">
+                  Apply Now <FiArrowRight />
+                </a>
+              )}
+            </div> */}
+          </div>
+          <div>
+            <div className="job-footer">
+              {Posted && <p>Posted on: {new Date(Posted).toLocaleDateString()}</p>}
+              {LinkApplication && (
+                <a href={LinkApplication} target="_blank" rel="noopener noreferrer" className="apply-button">
+                  Apply Now 
+                </a>
+              )}
+              <div className='overview'>
+                <h5>Job Overview</h5>
+                <h6>Job Title</h6>
+                {Position && <p>{Position}</p>}
+                <h6>Job Type</h6>
+                {jobtype?.data?.attributes?.Type && <p className="job-type"><FiBriefcase /> {jobtype.data.attributes.Type}</p>}
+                <h6>Location</h6>
+                {Location && <p className="location"><FiMapPin /> {Location}</p>}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
