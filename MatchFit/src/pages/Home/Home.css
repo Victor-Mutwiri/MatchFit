@@ -5,7 +5,8 @@
     justify-content: center;
     /* background-color: #fff; */
     /* margin-top: 3.5rem; */
-    background-image: url('../../assets/Black People.png');
+    /* background-image: url('../../assets/Black People.png'); */
+    background-image: url('https://res.cloudinary.com/duftqodrt/image/upload/v1731083464/Black_People_tmyzfn.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
