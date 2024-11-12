@@ -19,6 +19,9 @@ export const Navbar = () => {
         <div className="">
             <li><Link to='/about'>About</Link></li>
         </div>
+        <div className="">
+            <li><Link to='/analyze'>Analyze</Link></li>
+        </div>
         <i className='bx bx-menu right'/>
     </header>
   )

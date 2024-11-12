@@ -7,6 +7,7 @@ import { JobListings } from './pages/Jobs/JobListings';
 import JobDetail from './pages/Jobs/JobDescription';
 import { AboutUs } from './pages/About/About';
 import NotFound from './pages/404/NotFound';
+import ResumeAnalyzer from './pages/ResumeAnalyzer/ResumeAnalyzer';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path='/jobs' element={<JobListings/>}/>
         <Route path='/job/:id/:nameSlug' element={<JobDetail/>}/>
+        <Route path='/analyze' element={<ResumeAnalyzer/>} />
         <Route path='/about' element={<AboutUs/>}/>
         <Route path='*' element={<NotFound/>}/>
       </Routes>
